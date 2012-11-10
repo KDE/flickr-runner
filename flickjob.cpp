@@ -44,6 +44,8 @@ FlickJob::FlickJob(const QString& term, bool singleRunnerMode)
 
     QNetworkRequest request = QNetworkRequest(url);
     m_manager->get(request);
+
+    connect(m_manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(jobCompleted(QNetworkReply*)));
 }
 
 void FlickJob::jobCompleted(QNetworkReply* reply)

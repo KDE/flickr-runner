@@ -86,37 +86,36 @@ void Flickr::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch 
 
 void Flickr::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
 {
-    QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
-    QByteArray jsonResponse = reply->readAll();
-
+    kDebug() << "FLICKR DATA: " << data;
     QJson::Parser parser;
-    QVariantMap  result = parser.parse(jsonResponse).toMap();
+    QVariantMap  result = parser.parse(data).toMap();
     QList<QVariant> photos = result["photos"].toMap()["photo"].toList();
+
+    const QString term = context.query();
 
     foreach (QVariant photo, photos) {
         QVariantMap map = photo.toMap();
-//        map["farm"].toString(), map["server"].toString(),map["id"].toString(),map["secret"].toString());
-        kDebug() << "FLICKR RUNNER: " << " farm: " << map["farm"].toString() << " server:" << map["server"].toString();
 
        Plasma::QueryMatch match(this);
        match.setType(Plasma::QueryMatch::PossibleMatch);
+       QString fullUrl;
+       fullUrl = QString("http://farm%1.staticflickr.com/%2/%3_%4.jpg").arg(map["farm"].toString(), map["server"].toString(), map["id"].toString(), map["secret"].toString());
+//       if (reply->error() != 0) {
+  //         kDebug() << "KRunner::Flickr runner, Json parser error. please report. error code: " << reply->error();
+ //      }
 
-       if (reply->error() != 0) {
-           kDebug() << "KRunner::Flickr runner, Json parser error. please report. error code: " << reply->error();
-       }
-
-       QByteArray data = reply->readAll();
+//       QByteArray data = reply->readAll();
 
        QImage image;
-       image.loadFromData(data);
+ //      image.loadFromData(data);
 
        QIcon icon(new ImageIconEngine(image));
- //      match.setIcon(icon);
+//      match.setIcon(icon);
 
-//       match.setData(url);
-  //     match.setText(i18n("%1 on Flickr", title));
+        match.setData(fullUrl);
+        match.setText(i18n("%1 on Flickr", map["title"].toString()));
 
-//       context.addMatch(term, match);
+       context.addMatch(term, match);
     }
 }
 
