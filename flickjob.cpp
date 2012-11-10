@@ -31,8 +31,6 @@ FlickJob::FlickJob(const QString& term, bool singleRunnerMode)
 {
     m_manager = new QNetworkAccessManager(this);
 
-    QUrl url;
-
     int resultCount = singleRunnerMode ? 30 : 10;
     QUrl url("http://api.flickr.com/services/rest/");
     url.addQueryItem("method", "flickr.photos.search");

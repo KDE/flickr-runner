@@ -93,74 +93,31 @@ void Flickr::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
     QVariantMap  result = parser.parse(jsonResponse).toMap();
     QList<QVariant> photos = result["photos"].toMap()["photo"].toList();
 
-    QList<FlickrItem> flickrPhotos;
-
     foreach (QVariant photo, photos) {
         QVariantMap map = photo.toMap();
-        FlickrItem item(map["farm"].toString(), map["server"].toString(),map["id"].toString(),map["secret"].toString());
-        flickrPhotos.append(item);
+//        map["farm"].toString(), map["server"].toString(),map["id"].toString(),map["secret"].toString());
+        kDebug() << "FLICKR RUNNER: " << " farm: " << map["farm"].toString() << " server:" << map["server"].toString();
+
+       Plasma::QueryMatch match(this);
+       match.setType(Plasma::QueryMatch::PossibleMatch);
+
+       if (reply->error() != 0) {
+           kDebug() << "KRunner::Flickr runner, Json parser error. please report. error code: " << reply->error();
+       }
+
+       QByteArray data = reply->readAll();
+
+       QImage image;
+       image.loadFromData(data);
+
+       QIcon icon(new ImageIconEngine(image));
+ //      match.setIcon(icon);
+
+//       match.setData(url);
+  //     match.setText(i18n("%1 on Flickr", title));
+
+//       context.addMatch(term, match);
     }
-
-    emit imagesAvailable(flickrPhotos);
-
-    m_images.append(flickrPhotos);
-
-
-//    QJson::Parser parser;
-//    const QVariantMap resultsMap = parser.parse(data).toMap();
-//
-//    QVariantMap related = resultsMap.value("feed").toMap();
-//
-//    QVariantList subList = related.value("entry").toList();
-//
-//    const QString term = context.query();
-//
-//    foreach (const QVariant& variant, subList) {
-//        QVariantMap subMap = variant.toMap();
-//
-//        QVariantList linkList = subMap.value("link").toList();
-//        //FIXME: hardcoded..
-//        const QString& url = linkList.at(0).toMap().value("href").toString();
-//
-//        QVariantMap titleMap = subMap.value("title").toMap();
-//        const QString& title = titleMap.value("$t").toString();
-//
-//        QVariantMap subSubMap = subMap.value("media$group").toMap();
-//
-//        QVariantList thumbnailList = subSubMap.value("media$thumbnail").toList();
-//
-//        QString thumbnail;
-//        thumbnail = thumbnailList.at(2).toMap().value("url").toString();
-//
-//        QEventLoop loop;
-//        m_thumbnailDownloader = new QNetworkAccessManager();
-//        connect(m_thumbnailDownloader, SIGNAL(finished(QNetworkReply*)), &loop, SLOT(quit()));
-//
-//        QNetworkRequest request = QNetworkRequest(QUrl(thumbnail));
-//
-//        QNetworkReply *reply= m_thumbnailDownloader->get(request);
-//        loop.exec();
-//
-//        Plasma::QueryMatch match(this);
-//        match.setType(Plasma::QueryMatch::PossibleMatch);
-//
-//        if (reply->error() != 0) {
-//            kDebug() << "KRunner::Flickr runner, Json parser error. please report. error code: " << reply->error();
-//        }
-//
-//        QByteArray data = reply->readAll();
-//
-//        QImage image;
-//        image.loadFromData(data);
-//
-//        QIcon icon(new ImageIconEngine(image));
-//        match.setIcon(icon);
-//
-//        match.setData(url);
-//        match.setText(i18n("%1 on Flickr", title));
-//
-//        context.addMatch(term, match);
-//    }
 }
 
 #include "flickr.moc"
