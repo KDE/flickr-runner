@@ -1,7 +1,13 @@
 [Desktop Entry]
 Name=Flickr
+Name[pt]=Flickr
+Name[pt_BR]=Flickr
+Name[x-test]=xxFlickrxx
 
 Comment=Matches Flickr queries
+Comment[pt]=Corresponde às pesquisas do Flickr
+Comment[pt_BR]=Corresponde às pesquisas do Flickr
+Comment[x-test]=xxMatches Flickr queriesxx
 
 Icon=flickr
 
