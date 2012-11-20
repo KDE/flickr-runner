@@ -2,6 +2,7 @@
 Name=Flickr
 Name[cs]=Flickr
 Name[et]=Flickr
+Name[hu]=Flickr
 Name[nl]=Flickr
 Name[pt]=Flickr
 Name[pt_BR]=Flickr
@@ -11,6 +12,7 @@ Name[x-test]=xxFlickrxx
 
 Comment=Matches Flickr queries
 Comment[et]=Sobivate Flickri päringute leidmine
+Comment[hu]=Illeszkedő Flickr lekérések
 Comment[nl]=Komt overeen met Flickr-queries
 Comment[pt]=Corresponde às pesquisas do Flickr
 Comment[pt_BR]=Corresponde às pesquisas do Flickr
