@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Flickr
+Name[bs]=Flickr
 Name[cs]=Flickr
 Name[et]=Flickr
 Name[ga]=Flickr
@@ -15,6 +16,7 @@ Name[uk]=Flickr
 Name[x-test]=xxFlickrxx
 
 Comment=Matches Flickr queries
+Comment[bs]=Odgovara na Flickr upite
 Comment[et]=Sobivate Flickri päringute leidmine
 Comment[ga]=Meaitseálann sé iarratais Flickr
 Comment[hu]=Illeszkedő Flickr lekérések
