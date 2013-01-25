@@ -2,6 +2,7 @@
 Name=Flickr
 Name[bs]=Flickr
 Name[cs]=Flickr
+Name[de]=Flickr
 Name[et]=Flickr
 Name[ga]=Flickr
 Name[gl]=Flickr
@@ -17,6 +18,7 @@ Name[x-test]=xxFlickrxx
 
 Comment=Matches Flickr queries
 Comment[bs]=Odgovara na Flickr upite
+Comment[de]=Entspricht Flickr-Abfragen
 Comment[et]=Sobivate Flickri päringute leidmine
 Comment[ga]=Meaitseálann sé iarratais Flickr
 Comment[hu]=Illeszkedő Flickr lekérések
